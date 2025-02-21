@@ -47,7 +47,7 @@ class root(tk.Tk):
         return np.loadtxt("csv_files/MonthlyGlobalTemperature.csv", delimiter=",", skiprows=1, usecols=2)
 
     def test():
-        pass
+        return True
 
 if __name__ == "__main__":
     app = root()
