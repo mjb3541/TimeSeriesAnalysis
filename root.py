@@ -2,6 +2,7 @@ import tkinter as tk
 from process_page import process_page
 from reconstructed_page import reconstructed_page
 import numpy as np
+import os
 
 # root file for the tkinter window
 # manages all changes in frame
@@ -43,11 +44,13 @@ class root(tk.Tk):
 
     # customize function to load data into nparray
     def load_data(self):
+        current = os.path.abspath(__file__)
+        root_dir = os.path.dirname(current)
+        last = os.path.basename(root_dir)
+      
         print("loading file")
-        return np.loadtxt("src/csv_files/DailyDelhiClimateTest.csv", delimiter=",", skiprows=1, usecols=2)
+        return np.loadtxt(f"{last}/csv_files/DailyDelhiClimateTest.csv", delimiter=",", skiprows=1, usecols=2)
 
-    def test():
-        return True
 
 if __name__ == "__main__":
     app = root()
