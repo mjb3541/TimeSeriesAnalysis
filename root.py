@@ -3,6 +3,9 @@ from process_page import process_page
 from reconstructed_page import reconstructed_page
 from recurrence_page import recurrence_page
 import numpy as np
+import warnings
+
+warnings.simplefilter("ignore")
 
 # root file for the tkinter window
 # manages all changes in frame
@@ -21,21 +24,18 @@ class root(tk.Tk):
         self.recurrence_data = None
         self.reconstructed_data = None 
         self.title("CSV Analyzer")
-        self.geometry("700x500")
+        self.geometry("550x550")
         self.container = tk.Frame(self)
         self.container.pack(fill="both", expand=True)
         self.frames = {}
 
         for F in pages:
             frame = F(self.container, self)
-            print(frame)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
         self.show_frame("process_page")
 
     def show_frame(self, frame_class):
-        print("changing frame to: " + frame_class)
-
         if frame_class == "process_page":
             frame_class = process_page
         elif frame_class == "reconstructed_page":
@@ -49,7 +49,7 @@ class root(tk.Tk):
     # customize function to load data into nparray
     def load_data(self):
         print("loading file")
-        return np.loadtxt("csv_files/DailyDelhiClimateTest.csv", delimiter=",", skiprows=1, usecols=2)
+        return np.loadtxt("csv_files/DailyDelhiClimateTrain.csv", delimiter=",", skiprows=1, usecols=2)
 
 
 if __name__ == "__main__":

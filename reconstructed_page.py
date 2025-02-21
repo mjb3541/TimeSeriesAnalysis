@@ -15,7 +15,7 @@ class reconstructed_page(tk.Frame):
         self.plot_frame = tk.Frame(self)
         self.plot_frame.pack(fill="both", expand=True)
 
-        self.gfnn_label = tk.Label(self, text=f"GFNN Ratio: {self.controller.gfnn}")
+        self.gfnn_label = tk.Label(self, textvariable=self.controller.gfnn)
         self.gfnn_label.pack()
 
         self.back_button = tk.Button(self, text="Change 𝜏 or D_2", 
