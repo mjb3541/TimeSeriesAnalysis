@@ -16,7 +16,7 @@ class reconstructed_page(tk.Frame):
         self.plot_frame.pack(fill="both", expand=True)
 
         self.back_button = tk.Button(self, text="Change 𝜏 or D_2", 
-                                     command=self.controller.show_frame("process_page"))
+                                     command=lambda: self.controller.show_frame("process_page"))
         self.back_button.pack(pady=10, anchor="se")
 
     # Raise the page to the top of the stack
