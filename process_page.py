@@ -56,6 +56,7 @@ class process_page(tk.Frame):
                 lag=lag, min_dims=n_dims, max_dims=n_dims
             )
             print(f"Reconstruction complete.\nGFNN: {fnn_percentages}")
+            self.controller.gfnn.set(str(fnn_percentages))
 
             Recons = analyze.reconstruct(lag, n_dims)
 
