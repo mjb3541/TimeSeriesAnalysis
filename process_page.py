@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from phase_space import phase_space
+from pyts.image import RecurrencePlot
 
 class process_page(tk.Frame):
     
@@ -38,6 +39,10 @@ class process_page(tk.Frame):
         self.next_button = tk.Button(self, text="Compute", command=self.reconstruct)
         self.next_button.pack(pady=10)
 
+        # recurrence plot
+        self.rp_button = tk.Button(self, text="Compute Recurrence Plot", command=self.compute_recurrence_plot)
+        self.rp_button.pack(pady=10)
+
     # reconstructs the phase space 
     def reconstruct(self):
         print("Reconstruction initiated")
@@ -60,4 +65,30 @@ class process_page(tk.Frame):
         except Exception as e:
             result_text = f"Error during analysis: {str(e)}"
 
-    
+
+    # uses RecurrencePlot to compute and store a recurrence matrix
+    def compute_recurrence_plot(self):
+        lag = self.lag_slider.get()
+        n_dims = self.dim_slider.get()
+
+        x = self.controller.df
+        X = x.reshape(1, -1)  # shape = (1, N)
+
+        try:
+            rp = RecurrencePlot(
+                dimension=n_dims,
+                time_delay=lag,
+                threshold='point',
+                percentage=10
+            )
+
+            # transform into a 2D recurrence matrix
+            X_rp = rp.transform(X)  # shape = (1, size, size)
+            rp_matrix = X_rp[0]     # shape = (size, size)
+
+            self.controller.recurrence_data = rp_matrix
+
+            self.controller.show_frame("recurrence_page")
+
+        except Exception as exc:
+            print(f"Error during Recurrence Plot analysis: {str(exc)}")
