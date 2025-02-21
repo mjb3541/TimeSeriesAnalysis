@@ -44,7 +44,7 @@ class root(tk.Tk):
     # customize function to load data into nparray
     def load_data(self):
         print("loading file")
-        return np.loadtxt("csv_files/MonthlyGlobalTemperature.csv", delimiter=",", skiprows=1, usecols=2)
+        return np.loadtxt("src/csv_files/DailyDelhiClimateTest.csv", delimiter=",", skiprows=1, usecols=2)
 
     def test():
         return True
